@@ -111,7 +111,10 @@ def detect(save_img=False):
             save_path = str(save_dir / p.name)  # img.jpg
             if not os.path.exists("output"):
                 os.makedirs("output")
+            if not os.path.exists("output"):
+                os.makedirs("output_txt")
             save_path_img = "output/" + str(p.name[:-4]) + "_" + str(frames_count) + ".jpg"
+            save_path_txt = "output_txt/" + str(p.name[:-4]) + "_" + str(frames_count)
             txt_path = str(save_dir / 'labels' / p.stem) + ('' if dataset.mode == 'image' else f'_{frame}')  # img.txt
             gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
             
@@ -139,7 +142,7 @@ def detect(save_img=False):
                     if save_txt:  # Write to file
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
                         line = (cls, *xywh, conf) if opt.save_conf else (cls, *xywh)  # label format
-                        with open(txt_path + '.txt', 'a') as f:
+                        with open(save_path_txt + '.txt', 'a') as f:
                             f.write(('%g ' * len(line)).rstrip() % line + '\n')
 
                     if save_img or view_img:  # Add bbox to image
