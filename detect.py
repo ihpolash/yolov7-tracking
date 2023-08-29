@@ -111,7 +111,7 @@ def detect(save_img=False):
             save_path = str(save_dir / p.name)  # img.jpg
             if not os.path.exists("output"):
                 os.makedirs("output")
-            if not os.path.exists("output"):
+            if not os.path.exists("output_txt"):
                 os.makedirs("output_txt")
             save_path_img = "output/" + str(p.name[:-4]) + "_" + str(frames_count) + ".jpg"
             save_path_txt = "output_txt/" + str(p.name[:-4]) + "_" + str(frames_count)
